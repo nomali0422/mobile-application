@@ -1,0 +1,764 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Activities | Adventure Escape SA</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7f2;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: #174d32;
+            color: white;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #ff9f43;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #ff9f43;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 340px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 20px;
+
+            background:
+                linear-gradient(rgba(0, 0, 0, 0.55),
+                                rgba(0, 0, 0, 0.55)),
+                url("https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1600&q=80")
+                center/cover no-repeat;
+
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: auto;
+            font-size: 18px;
+        }
+
+        /* General sections */
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 45px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #174d32;
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .section-intro {
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 30px;
+        }
+
+        /* Search and filters */
+        .filters {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .filters input,
+        .filters select {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+            background: white;
+        }
+
+        .filters input {
+            width: min(100%, 300px);
+        }
+
+        .filters select {
+            min-width: 180px;
+        }
+
+        /* Activity cards */
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .activity-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.09);
+            transition: transform 0.2s;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .activity-card img {
+            display: block;
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+        }
+
+        .activity-content {
+            padding: 22px;
+        }
+
+        .category {
+            display: inline-block;
+            background: #e7efe6;
+            color: #174d32;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .activity-content h3 {
+            color: #174d32;
+            font-size: 21px;
+            margin-bottom: 10px;
+        }
+
+        .activity-content p {
+            margin-bottom: 13px;
+            color: #555;
+        }
+
+        .details {
+            border-top: 1px solid #eee;
+            padding-top: 12px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .price {
+            color: #174d32;
+            font-size: 23px;
+            font-weight: bold;
+            margin-bottom: 14px;
+        }
+
+        .price small {
+            font-size: 13px;
+            font-weight: normal;
+            color: #666;
+        }
+
+        .button {
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 6px;
+            padding: 11px 16px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .button-primary {
+            background: #ff9f43;
+            color: #222;
+        }
+
+        .button-primary:hover {
+            background: #f28b22;
+        }
+
+        .button-secondary {
+            background: #174d32;
+            color: white;
+        }
+
+        .button-secondary:hover {
+            background: #103923;
+        }
+
+        .activity-content .button {
+            width: 100%;
+        }
+
+        .no-results {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        /* Safety section */
+        .safety-section {
+            background: #e7efe6;
+            padding: 45px 7%;
+        }
+
+        .safety-grid {
+            max-width: 1100px;
+            margin: 25px auto 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .safety-card {
+            background: white;
+            text-align: center;
+            padding: 24px;
+            border-radius: 10px;
+        }
+
+        .safety-card .icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .safety-card h3 {
+            color: #174d32;
+            margin-bottom: 8px;
+        }
+
+        /* Call to action */
+        .cta {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .cta h2 {
+            color: #174d32;
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .cta p {
+            margin-bottom: 15px;
+        }
+
+        .cta .button {
+            margin: 6px;
+        }
+
+        /* Footer */
+        footer {
+            background: #174d32;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        footer a {
+            color: #ffb15c;
+            text-decoration: none;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        @media (max-width: 950px) {
+            .activity-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 650px) {
+            header {
+                justify-content: center;
+                text-align: center;
+            }
+
+            nav {
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .activity-grid,
+            .safety-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 30px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Website Navigation -->
+    <header>
+        <div class="logo">
+            Adventure <span>Escape SA</span>
+        </div>
+
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="overview.html">Overview</a>
+            <a href="about.html">About Us</a>
+            <a href="activities.html" class="active">Activities</a>
+            <a href="catalogue.html">Catalogue</a>
+            <a href="fees.html">Fees & Booking</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+        <div>
+            <h1>Discover Your Next Adventure</h1>
+
+            <p>
+                Explore the outdoors, challenge yourself and create
+                unforgettable memories with Adventure Escape SA.
+            </p>
+        </div>
+    </section>
+
+    <!-- Activities -->
+    <main class="container">
+
+        <h2 class="section-title">Our Adventure Activities</h2>
+
+        <p class="section-intro">
+            Browse our example adventure activities below.
+            Select an activity to enquire about arrangements and
+            availability. Prices shown are illustrative and should
+            be confirmed before booking.
+        </p>
+
+        <!-- Search and Category Filter -->
+        <div class="filters">
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Search activities..."
+                aria-label="Search activities"
+            >
+
+            <select id="categoryFilter" aria-label="Filter by category">
+                <option value="all">All Activities</option>
+                <option value="hiking">Hiking</option>
+                <option value="water">Water Adventures</option>
+                <option value="camping">Camping</option>
+                <option value="wildlife">Nature and Wildlife</option>
+                <option value="cycling">Cycling</option>
+                <option value="climbing">Climbing</option>
+            </select>
+
+        </div>
+
+        <div class="activity-grid" id="activityGrid">
+
+            <!-- Activity 1 -->
+            <article class="activity-card" data-category="hiking">
+                <img
+                    src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=800&q=80"
+                    alt="Hikers walking along a mountain trail"
+                    loading="lazy"
+                >
+
+                <div class="activity-content">
+                    <span class="category">Hiking</span>
+
+                    <h3>Mountain Hiking</h3>
+
+                    <p>
+                        Enjoy a guided hiking experience while exploring
+                        scenic trails and appreciating the natural
+                        surroundings.
+                    </p>
+
+                    <div class="details">
+                        <p>⏱ Duration: About 3–4 hours</p>
+                        <p>👥 Ideal for: Beginners and groups</p>
+                    </div>
+
+                    <div class="price">
+                        R85 <small>/ person (example price)</small>
+                    </div>
+
+                    <a
+                        href="fees.html"
+                        class="button button-primary"
+                    >
+                        View Fees
+                    </a>
+                </div>
+            </article>
+
+            <!-- Activity 2 -->
+            <article class="activity-card" data-category="water">
+                <img
+                    src="https://images.unsplash.com/photo-1530866495561-507c9faab2ed?auto=format&fit=crop&w=800&q=80"
+                    alt="Outdoor river adventure"
+                    loading="lazy"
+                >
+
+                <div class="activity-content">
+                    <span class="category">Water Adventures</span>
+
+                    <h3>River Rapids Adventure</h3>
+
+                    <p>
+                        Experience an exciting water-based adventure
+                        where suitable locations, trained guides and
+                        safety equipment are essential.
+                    </p>
+
+                    <div class="details">
+                        <p>⏱ Duration: About 2–3 hours</p>
+                        <p>👥 Ideal for: Adventure seekers</p>
+                    </div>
+
+                    <div class="price">
+                        R120 <small>/ person (example price)</small>
+                    </div>
+
+                    <a
+                        href="fees.html"
+                        class="button button-primary"
+                    >
+                        View Fees
+                    </a>
+                </div>
+            </article>
+
+            <!-- Activity 3 -->
+            <article class="activity-card" data-category="camping">
+                <img
+                    src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=800&q=80"
+                    alt="Tent set up at an outdoor campsite"
+                    loading="lazy"
+                >
+
+                <div class="activity-content">
+                    <span class="category">Camping</span>
+
+                    <h3>Forest Camping</h3>
+
+                    <p>
+                        Spend time outdoors, enjoy the surroundings
+                        and experience a camping adventure with
+                        suitable preparation and equipment.
+                    </p>
+
+                    <div class="details">
+                        <p>⏱ Duration: Overnight</p>
+                        <p>👥 Ideal for: Friends and groups</p>
+                    </div>
+
+                    <div class="price">
+                        R150 <small>/ person (example price)</small>
+                    </div>
+
+                    <a
+                        href="fees.html"
+                        class="button button-primary"
+                    >
+                        View Fees
+                    </a>
+                </div>
+            </article>
+
+            <!-- Activity 4 -->
+            <article class="activity-card" data-category="cycling">
+                <img
+                    src="https://images.unsplash.com/photo-1544191696-15693072aee7?auto=format&fit=crop&w=800&q=80"
+                    alt="Cyclist riding on an outdoor trail"
+                    loading="lazy"
+                >
+
+                <div class="activity-content">
+                    <span class="category">Cycling</span>
+
+                    <h3>Mountain Cycling</h3>
+
+                    <p>
+                        Explore selected outdoor trails by bicycle.
+                        Participants should use appropriate protective
+                        equipment and follow route guidance.
+                    </p>
+
+                    <div class="details">
+                        <p>⏱ Duration: About 2 hours</p>
+                        <p>👥 Ideal for: Cycling enthusiasts</p>
+                    </div>
+
+                    <div class="price">
+                        R100 <small>/ person (example price)</small>
+                    </div>
+
+                    <a
+                        href="fees.html"
+                        class="button button-primary"
+                    >
+                        View Fees
+                    </a>
+                </div>
+            </article>
+
+            <!-- Activity 5 -->
+            <article class="activity-card" data-category="wildlife">
+                <img
+                    src="https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=800&q=80"
+                    alt="Wildlife in a natural outdoor environment"
+                    loading="lazy"
+                >
+
+                <div class="activity-content">
+                    <span class="category">Nature and Wildlife</span>
+
+                    <h3>Nature Discovery Walk</h3>
+
+                    <p>
+                        Learn about natural environments, observe
+                        wildlife from a safe distance and discover
+                        the importance of conservation.
+                    </p>
+
+                    <div class="details">
+                        <p>⏱ Duration: About 2 hours</p>
+                        <p>👥 Ideal for: Families and nature lovers</p>
+                    </div>
+
+                    <div class="price">
+                        R75 <small>/ person (example price)</small>
+                    </div>
+
+                    <a
+                        href="fees.html"
+                        class="button button-primary"
+                    >
+                        View Fees
+                    </a>
+                </div>
+            </article>
+
+            <!-- Activity 6 -->
+            <article class="activity-card" data-category="climbing">
+                <img
+                    src="https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=800&q=80"
+                    alt="Person participating in a climbing activity"
+                    loading="lazy"
+                >
+
+                <div class="activity-content">
+                    <span class="category">Climbing</span>
+
+                    <h3>Rock Climbing</h3>
+
+                    <p>
+                        Take on a climbing challenge with appropriate
+                        equipment, suitable supervision and safety
+                        procedures.
+                    </p>
+
+                    <div class="details">
+                        <p>⏱ Duration: About 2–3 hours</p>
+                        <p>👥 Ideal for: Suitable beginners and climbers</p>
+                    </div>
+
+                    <div class="price">
+                        R130 <small>/ person (example price)</small>
+                    </div>
+
+                    <a
+                        href="fees.html"
+                        class="button button-primary"
+                    >
+                        View Fees
+                    </a>
+                </div>
+            </article>
+
+        </div>
+
+        <div class="no-results" id="noResults">
+            <h3>No activities found</h3>
+            <p>Try another search term or choose a different category.</p>
+        </div>
+
+    </main>
+
+    <!-- Safety Information -->
+    <section class="safety-section">
+        <h2 class="section-title">Adventure Responsibly</h2>
+
+        <p class="section-intro">
+            Your safety and care for the natural environment are
+            important when planning an outdoor activity.
+        </p>
+
+        <div class="safety-grid">
+
+            <div class="safety-card">
+                <div class="icon">🛡️</div>
+                <h3>Safety First</h3>
+                <p>
+                    Follow the guide's instructions and use suitable
+                    safety equipment for each activity.
+                </p>
+            </div>
+
+            <div class="safety-card">
+                <div class="icon">🎒</div>
+                <h3>Be Prepared</h3>
+                <p>
+                    Check the weather, wear suitable clothing and
+                    confirm what equipment you need to bring.
+                </p>
+            </div>
+
+            <div class="safety-card">
+                <div class="icon">🌿</div>
+                <h3>Protect Nature</h3>
+                <p>
+                    Avoid littering, respect wildlife and follow
+                    the rules of the area you visit.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <h2>Ready to Plan Your Adventure?</h2>
+
+        <p>
+            Check example prices or contact us to enquire about
+            activities and availability.
+        </p>
+
+        <a href="fees.html" class="button button-primary">
+            Fees and Booking
+        </a>
+
+        <a href="contact.html" class="button button-secondary">
+            Contact Us
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Adventure Escape SA. All rights reserved.</p>
+
+        <p>
+            Explore Nature. Embrace Adventure. Create Memories.
+        </p>
+
+        <p>
+            <a href="home.html">Home</a> |
+            <a href="about.html">About Us</a> |
+            <a href="contact.html">Contact</a>
+        </p>
+    </footer>
+
+    <!-- Search and Filter JavaScript -->
+    <script>
+        const searchInput = document.getElementById("searchInput");
+        const categoryFilter = document.getElementById("categoryFilter");
+        const activityCards = document.querySelectorAll(".activity-card");
+        const noResults = document.getElementById("noResults");
+
+        function filterActivities() {
+            const searchText = searchInput.value.toLowerCase().trim();
+            const selectedCategory = categoryFilter.value;
+
+            let visibleCount = 0;
+
+            activityCards.forEach(function(card) {
+                const activityText = card.textContent.toLowerCase();
+                const category = card.dataset.category;
+
+                const matchesSearch = activityText.includes(searchText);
+
+                const matchesCategory =
+                    selectedCategory === "all" ||
+                    category === selectedCategory;
+
+                if (matchesSearch && matchesCategory) {
+                    card.style.display = "";
+                    visibleCount++;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            noResults.style.display =
+                visibleCount === 0 ? "block" : "none";
+        }
+
+        searchInput.addEventListener("input", filterActivities);
+        categoryFilter.addEventListener("change", filterActivities);
+    </script>
+
+</body>
+</html>

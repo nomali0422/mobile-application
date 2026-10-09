@@ -1,0 +1,470 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate Your Fees | Adventure Escape SA</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #effffa;
+            color: #182522;
+        }
+
+        header {
+            background: #197342;
+            color: white;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            background: #d45b2a;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        header h3 {
+            margin: 0;
+        }
+
+        header small {
+            display: block;
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
+        main {
+            max-width: 650px;
+            margin: 25px auto;
+            padding: 16px;
+        }
+
+        .heading {
+            color: #d45b2a;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        h1 {
+            margin-top: 5px;
+        }
+
+        .panel {
+            background: white;
+            border: 1px solid #d8e6de;
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        select,
+        input[type="date"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbdad2;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+        .stepper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .stepper button {
+            width: 45px;
+            height: 43px;
+            border: 1px solid #d8e6de;
+            border-radius: 7px;
+            background: #effffa;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .stepper input {
+            max-width: 100px;
+            text-align: center;
+        }
+
+        .check-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 0;
+            border-bottom: 1px solid #edf2ef;
+        }
+
+        .check-row input {
+            width: 18px;
+            height: 18px;
+            accent-color: #197342;
+        }
+
+        .check-row label {
+            margin: 0;
+            font-weight: normal;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+
+        .price-row span {
+            color: #65756f;
+        }
+
+        .discount {
+            color: #197342;
+        }
+
+        .total {
+            border-top: 1px solid #d8e6de;
+            margin-top: 10px;
+            padding-top: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            font-weight: bold;
+        }
+
+        #total {
+            color: #d45b2a;
+            font-size: 25px;
+        }
+
+        .booking-button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            background: #d45b2a;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .booking-button:hover {
+            background: #b9471d;
+        }
+
+        #message {
+            display: none;
+            padding: 12px;
+            border-radius: 7px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .success {
+            display: block !important;
+            background: #e8f7ee;
+            color: #105631;
+        }
+
+        .error {
+            display: block !important;
+            background: #fff0ec;
+            color: #8d2d13;
+        }
+
+        .note {
+            color: #65756f;
+            font-size: 12px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #65756f;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">▲</div>
+    <h3>
+        ADVENTURE
+        <small>ESCAPE SA</small>
+    </h3>
+</header>
+
+<main>
+    <div class="heading">PRICING TRANSPARENCY</div>
+    <h1>Calculate Your Fees</h1>
+
+    <p>
+        Select your adventure, group size and optional extras
+        to calculate your estimated trip cost.
+    </p>
+
+    <form id="feesForm">
+
+        <section class="panel">
+
+            <div class="field">
+                <label for="trip">Select Your Escape</label>
+
+                <select id="trip">
+                    <option value="85">Andes Valley Trek — R85/person</option>
+                    <option value="120">River Rapids Run — R120/person</option>
+                    <option value="150">Forest Canopy Camp — R150/person</option>
+                    <option value="65">Sunrise Ridge Walk — R65/person</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="groupSize">Group Size (1–20 adventurers)</label>
+
+                <div class="stepper">
+                    <button type="button" id="minus">−</button>
+
+                    <input
+                        type="number"
+                        id="groupSize"
+                        min="1"
+                        max="20"
+                        value="4"
+                        required
+                    >
+
+                    <button type="button" id="plus">+</button>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="date">Choose Excursion Date</label>
+                <input type="date" id="date" required>
+            </div>
+
+            <h3>Expedition Add-ons</h3>
+
+            <div class="check-row">
+                <input type="checkbox" id="gear" checked>
+                <label for="gear">
+                    Gear rental — R25 per person
+                </label>
+            </div>
+
+            <div class="check-row">
+                <input type="checkbox" id="lunch">
+                <label for="lunch">
+                    Trail lunch — R12 per person
+                </label>
+            </div>
+
+        </section>
+
+        <section class="panel">
+
+            <h3>Itemized Estimation</h3>
+
+            <div class="price-row">
+                <span id="baseLabel">Base rate</span>
+                <strong id="baseCost">R340.00</strong>
+            </div>
+
+            <div class="price-row">
+                <span>Gear rental</span>
+                <strong id="gearCost">R100.00</strong>
+            </div>
+
+            <div class="price-row">
+                <span>Trail lunch</span>
+                <strong id="lunchCost">R0.00</strong>
+            </div>
+
+            <div class="price-row">
+                <span>Group discount (5+ people)</span>
+                <strong class="discount" id="discount">−R0.00</strong>
+            </div>
+
+            <div class="total">
+                <span>Estimated Total</span>
+                <span id="total">R440.00</span>
+            </div>
+
+            <p class="note">
+                Prices are sample values. This calculator does not
+                process payments or confirm reservations.
+            </p>
+
+            <button type="submit" class="booking-button">
+                Proceed to Booking →
+            </button>
+
+            <div id="message" role="status"></div>
+
+        </section>
+
+    </form>
+</main>
+
+<footer>
+    Adventure Escape SA | Explore responsibly, adventure safely.
+</footer>
+
+<script>
+    const trip = document.getElementById("trip");
+    const groupSize = document.getElementById("groupSize");
+    const date = document.getElementById("date");
+    const gear = document.getElementById("gear");
+    const lunch = document.getElementById("lunch");
+    const message = document.getElementById("message");
+
+    // Format prices in South African rand.
+    function money(amount) {
+        return new Intl.NumberFormat("en-ZA", {
+            style: "currency",
+            currency: "ZAR"
+        }).format(amount);
+    }
+
+    // Prevent users from choosing a date in the past.
+    const now = new Date();
+    const today = new Date(
+        now.getTime() - now.getTimezoneOffset() * 60000
+    ).toISOString().slice(0, 10);
+
+    date.min = today;
+
+    // Calculate the booking estimate.
+    function calculateFees() {
+        let people = parseInt(groupSize.value, 10);
+
+        if (isNaN(people)) {
+            people = 1;
+        }
+
+        people = Math.max(1, Math.min(20, people));
+        groupSize.value = people;
+
+        const price = Number(trip.value);
+        const base = price * people;
+        const gearFee = gear.checked ? 25 * people : 0;
+        const lunchFee = lunch.checked ? 12 * people : 0;
+
+        const discountFee = people >= 5
+            ? Math.round(base * 0.05 * 100) / 100
+            : 0;
+
+        const totalFee =
+            base + gearFee + lunchFee - discountFee;
+
+        document.getElementById("baseLabel").textContent =
+            `Base rate (${money(price)} × ${people})`;
+
+        document.getElementById("baseCost").textContent =
+            money(base);
+
+        document.getElementById("gearCost").textContent =
+            money(gearFee);
+
+        document.getElementById("lunchCost").textContent =
+            money(lunchFee);
+
+        document.getElementById("discount").textContent =
+            "−" + money(discountFee);
+
+        document.getElementById("total").textContent =
+            money(totalFee);
+    }
+
+    // Decrease group size.
+    document.getElementById("minus").addEventListener("click", function () {
+        groupSize.value = Math.max(
+            1,
+            Number(groupSize.value || 1) - 1
+        );
+
+        calculateFees();
+    });
+
+    // Increase group size.
+    document.getElementById("plus").addEventListener("click", function () {
+        groupSize.value = Math.min(
+            20,
+            Number(groupSize.value || 1) + 1
+        );
+
+        calculateFees();
+    });
+
+    // Update the total when an option changes.
+    [trip, groupSize, gear, lunch].forEach(function (element) {
+        element.addEventListener("input", calculateFees);
+        element.addEventListener("change", calculateFees);
+    });
+
+    // Validate the date before proceeding.
+    document.getElementById("feesForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        message.className = "success";
+        message.textContent = "";
+
+        if (!date.value) {
+            message.className = "error";
+            message.textContent =
+                "Please choose your excursion date.";
+            date.focus();
+            return;
+        }
+
+        if (date.value < today) {
+            message.className = "error";
+            message.textContent =
+                "Please select today or a future date.";
+            date.focus();
+            return;
+        }
+
+        message.className = "success";
+        message.textContent =
+            "Estimate calculated successfully! " +
+            "Trip: " + trip.options[trip.selectedIndex].text.split(" — ")[0] +
+            ". Group size: " + groupSize.value +
+            ". Date: " + date.value +
+            ". Total: " + document.getElementById("total").textContent +
+            ". This is a demo; your booking is not yet confirmed.";
+    });
+
+    // Display the initial calculation.
+    calculateFees();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,561 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact Us | Adventure Escape SA</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f5f7f2;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: #174d32;
+            color: white;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #ff9f43;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #ff9f43;
+        }
+
+        /* Hero section */
+        .hero {
+            background:
+                linear-gradient(rgba(0, 0, 0, 0.60),
+                                rgba(0, 0, 0, 0.60)),
+                url("https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=1600&q=80")
+                center/cover no-repeat;
+
+            color: white;
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 17px;
+        }
+
+        /* Main layout */
+        .container {
+            max-width: 1150px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            color: #174d32;
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .section-description {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 25px;
+            align-items: start;
+        }
+
+        /* Contact information */
+        .contact-info {
+            background-color: #174d32;
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .contact-info h2 {
+            color: #ffb15c;
+            margin-bottom: 15px;
+        }
+
+        .contact-info p {
+            margin-bottom: 18px;
+        }
+
+        .contact-item {
+            margin-bottom: 22px;
+        }
+
+        .contact-item h3 {
+            color: #ffb15c;
+            font-size: 17px;
+            margin-bottom: 5px;
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            overflow-wrap: anywhere;
+        }
+
+        .contact-item a:hover {
+            color: #ffb15c;
+        }
+
+        /* Contact form */
+        .contact-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        }
+
+        .contact-form h2 {
+            color: #174d32;
+            margin-bottom: 8px;
+        }
+
+        .form-intro {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: 2px solid #174d32;
+            border-color: #174d32;
+        }
+
+        textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 6px;
+            background-color: #ff9f43;
+            color: #222;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background-color: #f28b22;
+        }
+
+        .form-message {
+            display: none;
+            margin-top: 18px;
+            padding: 12px;
+            border-radius: 6px;
+            background-color: #e7efe6;
+            color: #174d32;
+        }
+
+        /* Frequently asked questions */
+        .faq-section {
+            background-color: #e7efe6;
+            padding: 45px 7%;
+        }
+
+        .faq-container {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .faq {
+            background-color: white;
+            padding: 18px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+        }
+
+        .faq h3 {
+            color: #174d32;
+            font-size: 17px;
+            margin-bottom: 6px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #174d32;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        footer a {
+            color: #ffb15c;
+            text-decoration: none;
+        }
+
+        @media (max-width: 800px) {
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                justify-content: center;
+                text-align: center;
+            }
+
+            nav {
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .container {
+                margin: 25px auto;
+            }
+
+            .contact-info,
+            .contact-form {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Website Header -->
+    <header>
+        <div class="logo">
+            Adventure <span>Escape SA</span>
+        </div>
+
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="overview.html">Overview</a>
+            <a href="about.html">About Us</a>
+            <a href="mission.html">Our Mission</a>
+            <a href="catalogue.html">Adventures</a>
+            <a href="fees.html">Fees & Booking</a>
+            <a href="contact.html" class="active">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Welcome Section -->
+    <section class="hero">
+        <h1>Contact Us</h1>
+        <p>
+            Have a question about an adventure? Send us an enquiry.
+            We look forward to hearing from you!
+        </p>
+    </section>
+
+    <!-- Contact Information and Form -->
+    <main class="container">
+
+        <h2 class="section-title">Get in Touch</h2>
+
+        <p class="section-description">
+            Contact Adventure Escape SA for information about activities,
+            estimated prices, group enquiries and booking arrangements.
+        </p>
+
+        <div class="contact-layout">
+
+            <!-- Contact Information -->
+            <section class="contact-info">
+                <h2>Contact Information</h2>
+
+                <p>
+                    Use the details below once your organisation's
+                    official contact information has been added.
+                </p>
+
+                <div class="contact-item">
+                    <h3>📍 Location</h3>
+                    <p>South Africa</p>
+                </div>
+
+                <div class="contact-item">
+                    <h3>📧 Email Address</h3>
+                    <p>
+                        <a href="mailto:YOUR_EMAIL@example.com">
+                            YOUR_EMAIL@example.com
+                        </a>
+                    </p>
+                </div>
+
+                <div class="contact-item">
+                    <h3>📞 Telephone</h3>
+                    <p>
+                        Add your official contact number here.
+                    </p>
+                </div>
+
+                <div class="contact-item">
+                    <h3>🕒 Business Hours</h3>
+                    <p>
+                        Monday – Friday<br>
+                        Add your confirmed operating hours.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Contact Form -->
+            <section class="contact-form">
+                <h2>Send Us a Message</h2>
+
+                <p class="form-intro">
+                    Complete the form below to prepare your enquiry.
+                    Fields marked with * are required.
+                </p>
+
+                <form id="contactForm">
+
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email address"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="Enter your phone number"
+                            autocomplete="tel"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Enquiry Type *</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Select an enquiry type</option>
+                            <option value="General enquiry">
+                                General Enquiry
+                            </option>
+                            <option value="Adventure activities">
+                                Adventure Activities
+                            </option>
+                            <option value="Fees and pricing">
+                                Fees and Pricing
+                            </option>
+                            <option value="Booking enquiry">
+                                Booking Enquiry
+                            </option>
+                            <option value="Group booking">
+                                Group Booking
+                            </option>
+                            <option value="Other">
+                                Other
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Your Message *</label>
+                        <textarea
+                            id="message"
+                            name="message"
+                            placeholder="Write your enquiry here..."
+                            required
+                        ></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-button">
+                        Prepare Email
+                    </button>
+
+                    <div
+                        id="formMessage"
+                        class="form-message"
+                        role="status"
+                        aria-live="polite"
+                    ></div>
+
+                </form>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Frequently Asked Questions -->
+    <section class="faq-section">
+        <div class="faq-container">
+
+            <h2 class="section-title">Frequently Asked Questions</h2>
+
+            <div class="faq">
+                <h3>How can I enquire about an adventure?</h3>
+                <p>
+                    Complete the contact form and prepare an email
+                    with your enquiry, or contact the organisation
+                    using its confirmed contact details.
+                </p>
+            </div>
+
+            <div class="faq">
+                <h3>Where can I check activity prices?</h3>
+                <p>
+                    Visit the Fees & Booking page to review the
+                    example prices and estimate your group costs.
+                </p>
+            </div>
+
+            <div class="faq">
+                <h3>Does submitting an enquiry confirm my booking?</h3>
+                <p>
+                    No. An enquiry is not a confirmed booking.
+                    Availability and arrangements must be confirmed
+                    by the organisation.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Adventure Escape SA. All rights reserved.</p>
+        <p>Explore Nature. Embrace Adventure. Create Memories.</p>
+        <p>
+            <a href="home.html">Home</a> |
+            <a href="catalogue.html">Adventures</a> |
+            <a href="fees.html">Fees & Booking</a>
+        </p>
+    </footer>
+
+    <!-- Contact Form JavaScript -->
+    <script>
+        const contactForm = document.getElementById("contactForm");
+        const formMessage = document.getElementById("formMessage");
+
+        contactForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            if (!contactForm.checkValidity()) {
+                contactForm.reportValidity();
+                return;
+            }
+
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const subject = document.getElementById("subject").value;
+            const message = document.getElementById("message").value.trim();
+
+            const emailSubject = encodeURIComponent(
+                "Adventure Escape SA - " + subject
+            );
+
+            const emailBody = encodeURIComponent(
+                "Name: " + name + "\n" +
+                "Email: " + email + "\n" +
+                "Phone: " + (phone || "Not provided") + "\n" +
+                "Enquiry Type: " + subject + "\n\n" +
+                "Message:\n" + message
+            );
+
+            formMessage.style.display = "block";
+            formMessage.textContent =
+                "Your email application will open so you can review and send your enquiry.";
+
+            const recipient = "YOUR_EMAIL@example.com";
+
+            window.location.href =
+                "mailto:" + recipient +
+                "?subject=" + emailSubject +
+                "&body=" + emailBody;
+        });
+    </script>
+
+</body>
+</html>
